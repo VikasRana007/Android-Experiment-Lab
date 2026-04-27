@@ -1,34 +1,29 @@
-package me.vikas.experimentLab
+package me.vikas.feature_coroutine.ui
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import me.vikas.experimentLab.ui.theme.DevPlaygroundAppTheme
-import me.vikas.feature_coroutine.ui.CoroutineActivity
+import me.vikas.feature_coroutine.ui.ui.theme.ExperimentLabTheme
 
-class MainActivity : ComponentActivity() {
+class CoroutineActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            DevPlaygroundAppTheme {
+            ExperimentLabTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android", modifier = Modifier.padding(innerPadding)
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
                     )
-                    StartCoroutineActivity(LocalContext.current)
                 }
             }
         }
@@ -36,20 +31,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun StartCoroutineActivity(context: Context) {
-    ElevatedButton(onClick = {
-        context.startActivity(Intent(context, CoroutineActivity::class.java))
-    }) {
-        Text(
-            text = "Navigate To Coroutine",
-
-            )
-    }
-}
-
-@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!", modifier = modifier
+        text = "Hello $name!",
+        modifier = modifier
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    ExperimentLabTheme {
+        Greeting("Android")
+    }
 }
