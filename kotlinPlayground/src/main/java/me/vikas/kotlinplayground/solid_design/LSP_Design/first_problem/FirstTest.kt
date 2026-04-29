@@ -1,7 +1,9 @@
-package me.vikas.experimentLab.solid_design.LSP_Design.first_problem
+package me.vikas.kotlinplayground.solid_design.LSP_Design.first_problem
 
 
-interface Bird
+interface Bird {
+
+}
 
 interface Flyable{
     fun fly()
@@ -28,7 +30,7 @@ class Sparrow: Bird, Flyable{
 class Ostrich: Bird
 
 
-fun main(){
+fun main() {
     val birdClient = BirdClient()
 
     val sparrow = Sparrow()
