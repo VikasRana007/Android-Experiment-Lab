@@ -41,7 +41,7 @@ fun StartCoroutineActivity(context: Context) {
         context.startActivity(Intent(context, CoroutineActivity::class.java))
     }) {
         Text(
-            text = "Navigate To Coroutine",
+            text = "Navigate To Coroutine in Compose UI",
 
             )
     }
