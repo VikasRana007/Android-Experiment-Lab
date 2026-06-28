@@ -37,6 +37,41 @@ android {
     buildFeatures {
         compose = true
     }
+
+//    tasks.register("Hello"){
+//        doLast {
+//            println("Hello Buddy !")
+//        }
+//    }
+
+    tasks.register("renameApk"){
+        dependsOn("assembleDebug")
+        doLast {
+            println("Rename APK task Executed.")
+            val apkDir = layout.buildDirectory.dir("outputs/apk/debug").get().asFile
+
+            val apk = apkDir.listFiles()?.firstOrNull{
+                it.extension == "apk"
+            }
+
+            println("APK null or not = ${(apk == null)}")
+
+            if(apk != null){
+                val newFile = File(apk.parentFile,
+                    "ExperiemntLab_v1.0.0.apk")
+
+                apk.renameTo(newFile)
+                println("Renamed to ${newFile.name}")
+            }else{
+                println("Apk Not Found.")
+            }
+//            println(apkDir.absolutePath)
+//            apkDir.listFiles()?.forEach {
+//                println(it.name)
+//            }
+        }
+    }
+
 }
 
 dependencies {
