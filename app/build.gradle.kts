@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -57,9 +60,12 @@ android {
             println("APK null or not = ${(apk == null)}")
 
             if(apk != null){
-                val newFile = File(apk.parentFile,
-                    "ExperiemntLab_v1.0.0.apk")
-
+                val appName = "Experiment_Lab"
+                val buildType = "debug"
+                val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+                val timestamp = LocalDateTime.now().format(formatter)
+                val newFileName = "${appName}_${timestamp}_$buildType.apk"
+                val newFile = File(apk.parentFile, newFileName)
                 apk.renameTo(newFile)
                 println("Renamed to ${newFile.name}")
             }else{
