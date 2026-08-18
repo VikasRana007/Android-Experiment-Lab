@@ -96,10 +96,7 @@ fun renameApkFile(){
                 } else {
                     println("Apk Not Found.")
                 }
-//            println(apkDir.absolutePath)
-//            apkDir.listFiles()?.forEach {
-//                println(it.name)
-//            }
+
             }
         }
     }catch (ex : Exception){
