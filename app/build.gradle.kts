@@ -42,6 +42,7 @@ android {
     }
 
     renameApkFile()
+    println("We Are Practicing PR . . .")
 
 }
 
@@ -94,7 +95,7 @@ fun renameApkFile(){
                     apk.renameTo(newFile)
                     println("Renamed to ${newFile.name}")
                 } else {
-                    println("Apk Not Found.")
+                    println("Apk Found.")
                 }
 
             }
