@@ -41,42 +41,7 @@ android {
         compose = true
     }
 
-//    tasks.register("Hello"){
-//        doLast {
-//            println("Hello Buddy !")
-//        }
-//    }
-
-    tasks.register("renameApk"){
-        dependsOn("assembleDebug")
-        doLast {
-            println("Rename APK task Executed.")
-            val apkDir = layout.buildDirectory.dir("outputs/apk/debug").get().asFile
-
-            val apk = apkDir.listFiles()?.firstOrNull{
-                it.extension == "apk"
-            }
-
-            println("APK null or not = ${(apk == null)}")
-
-            if(apk != null){
-                val appName = "Experiment_Lab"
-                val buildType = "debug"
-                val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
-                val timestamp = LocalDateTime.now().format(formatter)
-                val newFileName = "${appName}_${timestamp}_$buildType.apk"
-                val newFile = File(apk.parentFile, newFileName)
-                apk.renameTo(newFile)
-                println("Renamed to ${newFile.name}")
-            }else{
-                println("Apk Not Found.")
-            }
-//            println(apkDir.absolutePath)
-//            apkDir.listFiles()?.forEach {
-//                println(it.name)
-//            }
-        }
-    }
+    renameApkFile()
 
 }
 
@@ -103,4 +68,41 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+fun renameApkFile(){
+    try {
+        tasks.register("renameApk") {
+            dependsOn("assembleDebug")
+            doLast {
+                println("Rename APK task Executed.")
+                val apkDir = layout.buildDirectory.dir("outputs/apk/debug").get().asFile
+
+                val apk = apkDir.listFiles()?.firstOrNull {
+                    it.extension == "apk"
+                }
+
+                println("APK null or not = ${(apk == null)}")
+
+                if (apk != null) {
+                    val appName = "Experiment_Lab"
+                    val buildType = "debug"
+                    val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+                    val timestamp = LocalDateTime.now().format(formatter)
+                    val newFileName = "${appName}_${timestamp}_$buildType.apk"
+                    val newFile = File(apk.parentFile, newFileName)
+                    apk.renameTo(newFile)
+                    println("Renamed to ${newFile.name}")
+                } else {
+                    println("Apk Not Found.")
+                }
+//            println(apkDir.absolutePath)
+//            apkDir.listFiles()?.forEach {
+//                println(it.name)
+//            }
+            }
+        }
+    }catch (ex : Exception){
+        println()
+    }
 }
